@@ -22,6 +22,38 @@ public class MergeSort {
     }
 
     private void merge(Integer[] array, int l, int m, int r) {
+        int n1 = m - l + 1;
+        int n2 = r - m;
 
+        int[] leftArray = new int[n1];
+        int[] rightArray = new int[n2];
+
+        for (int i = 0; i < n1; i++) {
+            leftArray[i] = array[l + i];
+        }
+
+        for (int i = 0; i < n2; i++) {
+            rightArray[i] = array[m + 1 + i];
+        }
+
+        int i, j;
+        i = j = 0;
+
+        int k = l;
+        while (i < n1 && j < n2) {
+            if (leftArray[i] <= rightArray[j]) {
+                array[k] = leftArray[i];
+                i++;
+            } else {
+                array[k] = rightArray[j];
+                j++;
+            }
+            k++;
+        }
+
+        for (; i < n1; i++, k++)
+            array[k] = leftArray[i];
+        for (; i < n2; i++, k++)
+            array[k] = rightArray[i];
     }
 }
