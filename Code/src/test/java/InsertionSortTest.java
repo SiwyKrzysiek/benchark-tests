@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,6 +33,21 @@ class InsertionSortTest {
 
         // Then
         List<Double> expected = Arrays.asList(-3.2, 0.0001, 6.15, 6.22);
+        assertEquals(expected, sorted);
+    }
+
+    @Test
+    void sortShortString() {
+        // Given
+        String letters = "ddacb";
+        List<Character> data = letters.chars().mapToObj(c -> (char)c).collect(Collectors.toList());
+
+        // When
+        SortingAlgorithm algorithm = new InsertionSort();
+        String sorted = (String) algorithm.sort(data).stream().map(String::valueOf).collect(Collectors.joining());
+
+        // Then
+        String expected = "abcdd";
         assertEquals(expected, sorted);
     }
 }
