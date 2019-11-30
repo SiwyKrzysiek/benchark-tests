@@ -1,16 +1,16 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MergeSort {
-    public List<Integer> sort(List<Integer> list) {
-        Integer[] array = new Integer[list.size()];
-        array = list.toArray(array);
+public class MergeSort<T extends Comparable> implements SortingAlgorithm<T> {
+
+    @Override
+    public List<T> sort(List<T> list) {
+        Comparable[] array = list.toArray(new Comparable[0]);
         divide(array, 0, list.size() - 1);
-        return new ArrayList<>(Arrays.asList(array));
+        return Arrays.asList((T[]) array);
     }
 
-    private void divide(Integer[] array, int l, int r) {
+    private void divide(Comparable[] array, int l, int r) {
         if (l < r) {
             int m = (r + l) / 2;
 
@@ -21,12 +21,12 @@ public class MergeSort {
         }
     }
 
-    private void merge(Integer[] array, int l, int m, int r) {
+    private void merge(Comparable[] array, int l, int m, int r) {
         int n1 = m - l + 1;
         int n2 = r - m;
 
-        int[] leftArray = new int[n1];
-        int[] rightArray = new int[n2];
+        Comparable[] leftArray = new Comparable[n1];
+        Comparable[] rightArray = new Comparable[n2];
 
         for (int i = 0; i < n1; i++) {
             leftArray[i] = array[l + i];
@@ -41,7 +41,7 @@ public class MergeSort {
 
         int k = l;
         while (i < n1 && j < n2) {
-            if (leftArray[i] <= rightArray[j]) {
+            if (leftArray[i].compareTo(rightArray[j]) < 0) {
                 array[k] = leftArray[i];
                 i++;
             } else {
