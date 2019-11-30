@@ -1,36 +1,23 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MergeSortTest {
     @Test
     void mergeSortTest() {
         //Given
-        List<Integer> checker = new ArrayList<>();
-        List<Integer> toSort = new ArrayList<>();
-        for (int i = 0; i < 1000000; i++) {
-            checker.add(new Random().nextInt(1000000));
-            toSort.add(checker.get(i));
-        }
-        checker.sort(Comparator.comparingInt(o -> o));
+        List<Integer> randomNumbers = new Random().ints(1000000).boxed().collect(Collectors.toList());
 
         //When
-        toSort = new MergeSort().sort(toSort);
+        List<Integer> result = new MergeSort().sort(randomNumbers);
 
         //Then
-        boolean sorted = true;
-        for (int i = 0; i < 1000000; i++) {
-            if (!checker.get(i).equals(toSort.get(i))) {
-                sorted = false;
-                break;
-            }
-        }
-        assertTrue(sorted);
+        List<Integer> sorted = randomNumbers.stream().sorted().collect(Collectors.toList());
+        assertEquals(sorted, result);
     }
 
 }
