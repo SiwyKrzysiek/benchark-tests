@@ -2,15 +2,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class QuickSort {
-    public List<Integer> sort(List<Integer> list) {
-        Integer[] array = new Integer[list.size()];
+public class QuickSort <T extends Comparable> implements SortingAlgorithm<T>{
+
+    @Override
+    public List<T> sort(List<T> list) {
+        Comparable[] array = new Comparable[list.size()];
         array = list.toArray(array);
         quickSort(array, 0, list.size() - 1);
-        return new ArrayList<>(Arrays.asList(array));
+        return Arrays.asList((T[]) array);
     }
 
-    private void quickSort(Integer[] A, int lo, int hi) {
+    private void quickSort(Comparable[] A, int lo, int hi) {
         if( lo < hi ) {
             int p = partition(A, lo, hi);
             quickSort(A, lo, p - 1);
@@ -18,11 +20,11 @@ public class QuickSort {
         }
     }
 
-    private int partition(Integer[] A, int lo, int hi) {
-        int pivot = A[hi];
+    private int partition(Comparable[] A, int lo, int hi) {
+        Comparable pivot = A[hi];
         int  i = lo;
         for( int j = lo; j < hi; j++) {
-            if(A[j] < pivot){
+            if(A[j].compareTo(pivot) < 0){
                 swap(A, i, j);
                 i++;
             }
@@ -30,8 +32,8 @@ public class QuickSort {
         swap(A, i, hi);
         return i;
     }
-    private void swap(Integer[] A, int a, int b){
-        int buff = A[a];
+    private void swap(Comparable[] A, int a, int b){
+        Comparable buff = A[a];
         A[a] = A[b];
         A[b] = buff;
     }
