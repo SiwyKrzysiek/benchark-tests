@@ -1,29 +1,27 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class BubbleSort {
+public class BubbleSort<T extends Comparable> implements SortingAlgorithm<T> {
 
-    public static List<Integer> sort (List<Integer> list)
-    {
-        int length = list.size();
-
+    @Override
+    public List<T> sort(List<T> data) {
+        int length = data.size();
         boolean done = true;
 
         do{
             done = true;
-            for(int i = 0; i<length-1; i++)
+            for(int i = 0; i<length - 1; i++)
             {
-                if(list.get(i)>list.get(i+1))
+                if(data.get(i).compareTo(data.get(i+1)) > 0)
                 {
-                    int temp = list.get(i);
-                    list.set(i, list.get(i+1));
-                    list.set(i+1, temp);
+                    T temp = data.get(i);
+                    data.set(i, data.get(i+1));
+                    data.set(i+1, temp);
                     done = false;
                 }
             }
+        }while(!done);
 
-        }while (done == false);
-
-        return list;
+        return data;
     }
 }
