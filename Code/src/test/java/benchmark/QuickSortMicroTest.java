@@ -48,7 +48,7 @@ public class QuickSortMicroTest {
     }
 
     @Benchmark
-    public void benchmark(benchmark.InsertionSortMicroTest plan) {
+    public void benchmark() {
         sortingAlgorithm.sort(data);
     }
 }
