@@ -1,9 +1,12 @@
+package unit;
+
 import org.junit.jupiter.api.Test;
+import sorting.CoctailSort;
+import sorting.SortingAlgorithm;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

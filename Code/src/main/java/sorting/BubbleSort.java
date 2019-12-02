@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package sorting;
+
 import java.util.List;
 
 public class BubbleSort<T extends Comparable> implements SortingAlgorithm<T> {
