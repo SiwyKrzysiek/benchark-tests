@@ -23,9 +23,25 @@ public class BisectionSearch<T extends Comparable> {
      * @return found value from the list or <c>null</c> if not found
      */
     public T find(List<T> data, T value) {
+        final List<T> sorted = sortingAlgorithm.sort(data);
+
         int startIndex = 0;
         int endIndex = data.size() - 1;
 
+        while (startIndex <= endIndex) {
+            int middleIndex = (startIndex + endIndex) / 2;
+            final T middleElement = sorted.get(middleIndex);
+
+            if (middleElement.compareTo(value) == 0)
+                return middleElement;
+
+            if (middleElement.compareTo(value) > 0)
+                endIndex = middleIndex - 1;
+            else
+                startIndex = middleIndex + 1;
+        }
+
+        // Value not found
         return null;
     }
 }
