@@ -23,13 +23,16 @@ public class BisectionSearchMacroTest {
     @Param({ "Bubble sort", "Cocktail sort", "Insertion sort", "Merge sort", "Quick sort" })
     public String algorithmName;
 
+    public final int FROM = 0;
+    public final int TO = 400;
     public final int DATA_SIZE = 500;
     public final List<Integer> data;
 
     public BisectionSearch<Integer> bisectionSearch;
+    public Integer target;
 
     {
-        data = new Random().ints(DATA_SIZE).boxed().collect(Collectors.toList());
+        data = new Random().ints(DATA_SIZE, FROM ,TO).boxed().collect(Collectors.toList());
     }
 
     public static void main(String[] args) throws RunnerException {
@@ -45,6 +48,12 @@ public class BisectionSearchMacroTest {
     @Setup(Level.Iteration)
     public void setup() {
         bisectionSearch = new BisectionSearch<>(sortingAlgorithmFromName(algorithmName));
+        target = new Random().nextInt(TO) + FROM;
+    }
+
+    @Benchmark
+    public void benchmark() {
+        bisectionSearch.find(data, target);
     }
 
     private SortingAlgorithm<Integer> sortingAlgorithmFromName(String name) {
